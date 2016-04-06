@@ -17,19 +17,19 @@ def getVMList(optLong, printOutput):
 
 def createNewVM(newVMName, registerVM, printOutput):
     if registerVM == True:
-        p = subprocess.check_output(["VBoxManage", ])
+        p = subprocess.check_output(["VBoxManage", "createvm", "--name", newVMName, "--register"], universal_newlines=True)
+    elif registerVM == False:
+        p = subprocess.check_output(["VBoxManage", "createvm", "--name", newVMName], universal_newlines=True)
     if printOutput == True:
         print(p)
 
 
 
 def startVM(VMName, startType, printOutput):
-    p = subprocess.check_output(["VBoxManage", "startvm", VMName, "--type", startType],universal_newlines=True)
+    p = subprocess.check_output(["VBoxManage", "startvm", VMName, "--type", startType], universal_newlines=True)
 
 
 
 def showVMInfo(VMName, printOutput):
     p = subprocess.check_output(["VBoxManage", "showvminfo", VMName], universal_newlines=True)
     print(p)
-
-showVMInfo("win10")
